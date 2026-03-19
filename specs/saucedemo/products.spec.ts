@@ -13,4 +13,8 @@ test.describe("Products Page Tests", () => {
   test("Verify Products Title", async ({ productsPage }) => {
     await expect(productsPage.getProductsTitle()).toContainText("Products");
   });
+
+  test("Verify Product Prices filtered from low to high", async ({productsPage}) => {
+    
+  })
 });
