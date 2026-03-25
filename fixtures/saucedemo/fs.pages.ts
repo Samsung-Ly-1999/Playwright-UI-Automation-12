@@ -1,9 +1,10 @@
 import { test as base } from "@playwright/test";
 import { ProductsPage } from "../../pages/saucedemo/products.pom";
-import { SauceDemoFixtures } from "./types/fs.types";
+import { SauceDemoFixtures } from "../../types/saucedemo/fs.types";
 import { LoginPage } from "../../pages/saucedemo/login.pom";
 import dotenv from "dotenv";
 import path from "path";
+import { ProductSteps } from "../../steps/saucedemo/products.steps";
 
 // Read from .env file
 dotenv.config();
@@ -27,5 +28,9 @@ export const test = base.extend<SauceDemoFixtures>({
     },
     { option: true },
   ],
+  productSteps: async ({ productsPage }, use) => {
+    const productSteps = new ProductSteps(productsPage);
+    use(productSteps);
+  },
 });
 export { expect } from "@playwright/test";
