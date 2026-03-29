@@ -5,6 +5,8 @@ import { LoginPage } from "../../pages/saucedemo/login.pom";
 import dotenv from "dotenv";
 import path from "path";
 import { ProductSteps } from "../../steps/saucedemo/products.steps";
+import { CartsPage } from "../../pages/saucedemo/carts.pom";
+import { CartsSteps } from "../../steps/saucedemo/carts.steps";
 
 // Read from .env file
 dotenv.config();
@@ -21,6 +23,10 @@ export const test = base.extend<SauceDemoFixtures>({
     await loginPage.goto();
     use(loginPage);
   },
+  cartsPage: async ({ page}, use) => {
+    const cartsPage = new CartsPage(page);
+    await use(cartsPage);
+  },
   user: [
     {
       username: process.env.SAUCE_DEMO_USERNAME!,
@@ -32,5 +38,9 @@ export const test = base.extend<SauceDemoFixtures>({
     const productSteps = new ProductSteps(productsPage);
     use(productSteps);
   },
+  cartSteps: async ({ cartsPage}, use) => {
+    const cartSteps = new CartsSteps(cartsPage);
+    use(cartSteps);
+  }
 });
 export { expect } from "@playwright/test";

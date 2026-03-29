@@ -6,3 +6,9 @@ export enum PRODUCT_SELECT_VALUES {
 }
 
 export type PRODUCT_VALUES = "NAME_A_TO_Z" | "NAME_Z_TO_A" | "PRICE_LOW_HIGH" | "PRICE_HIGH_LOW"
+
+export interface Product {
+    title: string,
+    description: string,
+    price: string
+}
