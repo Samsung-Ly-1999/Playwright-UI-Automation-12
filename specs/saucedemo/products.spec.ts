@@ -1,4 +1,3 @@
-import { LoginPage } from "../../pages/saucedemo/login.pom";
 import { test, expect } from "../../fixtures/saucedemo/fs.pages";
 
 test.describe("Products Page Tests", () => {

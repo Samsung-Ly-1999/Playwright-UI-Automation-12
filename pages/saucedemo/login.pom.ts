@@ -1,13 +1,14 @@
 import { Page, Locator } from '@playwright/test';
+import { CommonPage } from './common.pom';
 
-export class LoginPage{
+export class LoginPage extends CommonPage{
     private readonly login_url: string = "https://www.saucedemo.com";
-    private readonly page: Page;
     private readonly usernameInput: Locator;
     private readonly passwordInput: Locator;
     private readonly loginBtn: Locator;
 
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.usernameInput = this.page.getByPlaceholder("Username");
         this.passwordInput = this.page.getByPlaceholder("Password");

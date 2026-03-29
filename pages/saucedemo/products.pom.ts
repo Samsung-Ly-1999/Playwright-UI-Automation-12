@@ -1,27 +1,31 @@
 import { Page, Locator } from '@playwright/test'
 import { PRODUCT_VALUES } from '../../types/saucedemo/product.types';
 import { PRODUCT_SELECT_VALUES } from '../../types/saucedemo/product.types';
+import { get } from 'node:http';
+import { CommonPage } from './common.pom';
 
-export class ProductsPage {
-    private readonly PRODUCTS_URL: string = "https://www.saucedemo.com/inventory.html" ;
-    private readonly SWAG_LABS: string = "Swag Labs";
-    private readonly PRODUCTS_ATTRIBUTE: string = "title";
-    private readonly PRODUCTS_FILTER: string = "product-sort-container";
-    private readonly PRODUCTS_SELECTOR: string = "active-option";
-    private readonly page: Page;
-    private readonly INVENTORY_PRICE_VALUE: string = "inventory-item-price";
-    private readonly INVENTORY_ITEM_VALUE: string = "inventory-item-name";
+export class ProductsPage extends CommonPage{
+    PRODUCTS_URL: string = "https://www.saucedemo.com/inventory.html" ;
+    SWAG_LABS: string = "Swag Labs";
+    PRODUCTS_ATTRIBUTE: string = "title";
+    PRODUCTS_FILTER: string = "product-sort-container";
+    PRODUCTS_SELECTOR: string = "active-option";
+    INVENTORY_PRICE_VALUE: string = "inventory-item-price";
+    INVENTORY_ITEM_VALUE: string = "inventory-item-name";
+    SAUCE_LABS_BACKPACK_ADD_TO_CART_BTN: string = "add-to-cart-sauce-labs-backpack"
 
-    app_logo_title: Locator;
-    products_title: Locator;
-    filter: Locator;
-    filter_span: Locator;
-    inventory_prices: Locator;
-    inventory_item_names: Locator;
+    private readonly app_logo_title: Locator;
+    private readonly products_title: Locator;
+    private readonly filter: Locator;
+    private readonly filter_span: Locator;
+    private readonly inventory_prices: Locator;
+    private readonly inventory_item_names: Locator;
+    private readonly sauce_labs_backpack_add_to_cart_btn: Locator;
 
     //inventory_items: Array<Locator>;
 
     constructor(page: Page){
+        super(page);
         this.page = page;
         this.app_logo_title = this.page.getByText(this.SWAG_LABS);
         this.products_title = this.page.locator(`[data-test=${this.PRODUCTS_ATTRIBUTE}]`);
@@ -29,6 +33,7 @@ export class ProductsPage {
         this.filter_span = this.page.locator(`[data-test=${this.PRODUCTS_SELECTOR}]`);
         this.inventory_prices = this.page.locator(`[data-test=${this.INVENTORY_PRICE_VALUE}]`);
         this.inventory_item_names = this.page.locator(`[data-test=${this.INVENTORY_ITEM_VALUE}]`);
+        this.sauce_labs_backpack_add_to_cart_btn = this.page.locator(`[data-test=${this.SAUCE_LABS_BACKPACK_ADD_TO_CART_BTN}]`);
     }
 
     // navigate to base products url
@@ -44,6 +49,10 @@ export class ProductsPage {
         return this.products_title;
     }
 
+    public getFilterSpan(){
+        return this.filter_span;
+    }
+
     // set filter
     async setProductsFilter(name: PRODUCT_VALUES){
         const value_code = PRODUCT_SELECT_VALUES[name];
@@ -56,6 +65,10 @@ export class ProductsPage {
 
     async getInventoryItemNames(): Promise<string[]>{
         return await this.inventory_item_names.allInnerTexts();
+    }
+
+    async addSauceLabsBackpackToCart(){
+        await this.sauce_labs_backpack_add_to_cart_btn.click();
     }
 
 }

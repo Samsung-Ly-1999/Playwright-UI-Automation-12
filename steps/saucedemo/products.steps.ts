@@ -8,7 +8,7 @@ export class ProductSteps{
     }
 
     async verifyFilterIsSet(name: string){
-        await expect(this.productsPage.filter_span).toHaveText(name);
+        await expect(this.productsPage.getFilterSpan()).toHaveText(name);
     }
 
     async verifyPrices(mode: string){
