@@ -9,7 +9,6 @@ export class LoginPage extends CommonPage{
 
     constructor(page: Page){
         super(page);
-        this.page = page;
         this.usernameInput = this.page.getByPlaceholder("Username");
         this.passwordInput = this.page.getByPlaceholder("Password");
         this.loginBtn = this.page.getByRole('button', { name: 'Login'});

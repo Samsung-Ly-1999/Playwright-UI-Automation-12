@@ -7,7 +7,6 @@ export class CartsPage extends CommonPage{
     CONTINUE_SHOPPING_BTN: string = "continue-shopping";
     constructor(page: Page){
         super(page);
-        this.page = page;
     }
 
     public async goto(){

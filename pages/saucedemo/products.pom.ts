@@ -26,7 +26,6 @@ export class ProductsPage extends CommonPage{
 
     constructor(page: Page){
         super(page);
-        this.page = page;
         this.app_logo_title = this.page.getByText(this.SWAG_LABS);
         this.products_title = this.page.locator(`[data-test=${this.PRODUCTS_ATTRIBUTE}]`);
         this.filter = this.page.locator(`[data-test=${this.PRODUCTS_FILTER}]`);
